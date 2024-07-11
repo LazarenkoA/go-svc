@@ -44,6 +44,10 @@ type Service interface {
 	// Stop is called in response to syscall.SIGINT, syscall.SIGTERM, or when a
 	// Windows Service is stopped.
 	Stop() error
+
+	Log(msg string)
+
+	SessionChange(EventType EventType)
 }
 
 // Context interface contains an optional Context function which a Service can implement.

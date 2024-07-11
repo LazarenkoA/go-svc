@@ -1,15 +1,25 @@
+//go:build windows
 // +build windows
 
 package svc
 
 import (
 	"context"
+	"golang.org/x/sys/windows"
 	"os"
 	"path/filepath"
 	"sync"
 	"syscall"
 
 	wsvc "golang.org/x/sys/windows/svc"
+)
+
+type EventType int32
+
+const (
+	EventTypeUndefined EventType = iota
+	EventTypesLogOn
+	EventTypesLogOff
 )
 
 // Create variables for svc and signal functions so we can mock them in tests
@@ -137,7 +147,7 @@ func (ws *windowsService) run() error {
 
 // Execute is invoked by Windows
 func (ws *windowsService) Execute(args []string, r <-chan wsvc.ChangeRequest, changes chan<- wsvc.Status) (bool, uint32) {
-	const cmdsAccepted = wsvc.AcceptStop | wsvc.AcceptShutdown
+	const cmdsAccepted = wsvc.AcceptStop | wsvc.AcceptShutdown | wsvc.AcceptSessionChange
 	changes <- wsvc.Status{State: wsvc.StartPending}
 
 	if err := ws.i.Start(); err != nil {
@@ -153,11 +163,26 @@ func (ws *windowsService) Execute(args []string, r <-chan wsvc.ChangeRequest, ch
 		case c = <-r:
 		case <-ws.ctx.Done():
 			c = wsvc.ChangeRequest{Cmd: wsvc.Stop}
+			ws.i.Log("ctx done")
 		}
+
+		//ws.i.Log(fmt.Sprintf("Cmd: %d, CurrentStatus: %d, EventData: %d, EventType: %d", c.Cmd, c.CurrentStatus, c.EventData, c.EventType))
 
 		switch c.Cmd {
 		case wsvc.Interrogate:
 			changes <- c.CurrentStatus
+		case wsvc.SessionChange:
+			changes <- c.CurrentStatus
+
+			t := EventTypeUndefined
+			switch c.EventType {
+			case windows.WTS_SESSION_LOGOFF:
+				t = EventTypesLogOff
+			case windows.WTS_SESSION_LOGON:
+				t = EventTypesLogOn
+			}
+
+			ws.i.SessionChange(t)
 		case wsvc.Stop, wsvc.Shutdown:
 			changes <- wsvc.Status{State: wsvc.StopPending}
 			err := ws.i.Stop()
