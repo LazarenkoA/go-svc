@@ -12,7 +12,7 @@ Call svc.Run() with a reference to your svc.Service implementation to start your
 
 When running in console mode Ctrl+C is treated like a Stop Service signal.
 
-For a full guide visit https://github.com/judwhite/go-svc
+For a full guide visit https://github.com/LazarenkoA/go-svc
 */
 package svc
 

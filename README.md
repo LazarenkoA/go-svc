@@ -1,11 +1,11 @@
 # go-svc
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/judwhite/go-svc.svg)](https://pkg.go.dev/github.com/judwhite/go-svc)
-[![MIT License](https://img.shields.io/badge/license-MIT-007d9c)](https://github.com/judwhite/go-svc/blob/main/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/judwhite/go-svc)](https://goreportcard.com/report/github.com/judwhite/go-svc)
-[![Build Status](https://github.com/judwhite/go-svc/workflows/tests/badge.svg)](https://github.com/judwhite/go-svc/actions?query=workflow%3Atests)
+[![Go Reference](https://pkg.go.dev/badge/github.com/LazarenkoA/go-svc.svg)](https://pkg.go.dev/github.com/LazarenkoA/go-svc)
+[![MIT License](https://img.shields.io/badge/license-MIT-007d9c)](https://github.com/LazarenkoA/go-svc/blob/main/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/LazarenkoA/go-svc)](https://goreportcard.com/report/github.com/LazarenkoA/go-svc)
+[![Build Status](https://github.com/LazarenkoA/go-svc/workflows/tests/badge.svg)](https://github.com/LazarenkoA/go-svc/actions?query=workflow%3Atests)
 
-Go Windows Service wrapper that plays nice with Linux. Windows tests [here](https://github.com/judwhite/go-svc/blob/main/svc_windows_test.go).
+Go Windows Service wrapper that plays nice with Linux. Windows tests [here](https://github.com/LazarenkoA/go-svc/blob/main/svc_windows_test.go).
 
 ## Project Status
 
@@ -14,7 +14,7 @@ Go Windows Service wrapper that plays nice with Linux. Windows tests [here](http
 
 ## Go Modules
 
-* Please note the `import` path and `go.mod` change from `github.com/judwhite/go-svc/svc` to `github.com/judwhite/go-svc` for `v1.2+`
+* Please note the `import` path and `go.mod` change from `github.com/LazarenkoA/go-svc/svc` to `github.com/LazarenkoA/go-svc` for `v1.2+`
 * `v1.1.3` and earlier can be imported using the previous import path
 * `v1.2+` code is backwards compatible with previous versions
 
@@ -23,11 +23,11 @@ module awesomeProject
 
 go 1.15
 
-require github.com/judwhite/go-svc v1.2.0
+require github.com/LazarenkoA/go-svc v1.2.0
 ```
 
 ```go
-import "github.com/judwhite/go-svc"
+import "github.com/LazarenkoA/go-svc"
 ```
 
 ## Example
@@ -39,7 +39,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/judwhite/go-svc"
+	"github.com/LazarenkoA/go-svc"
 )
 
 // program implements svc.Service
@@ -94,7 +94,7 @@ func (p *program) Stop() error {
 
 ## More Examples
 
-See the [example](https://github.com/judwhite/go-svc/tree/main/example) directory for more examples, including installing and uninstalling binaries built in Go as Windows services.
+See the [example](https://github.com/LazarenkoA/go-svc/tree/main/example) directory for more examples, including installing and uninstalling binaries built in Go as Windows services.
 
 ## Similar Projects
 
@@ -102,4 +102,4 @@ See the [example](https://github.com/judwhite/go-svc/tree/main/example) director
 
 ## License
 
-`go-svc` is under the MIT license. See the [LICENSE](https://github.com/judwhite/go-svc/blob/main/LICENSE) file for details.
+`go-svc` is under the MIT license. See the [LICENSE](https://github.com/LazarenkoA/go-svc/blob/main/LICENSE) file for details.

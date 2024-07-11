@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/judwhite/go-svc"
+	"github.com/LazarenkoA/go-svc"
 )
 
 // implements svc.Service
