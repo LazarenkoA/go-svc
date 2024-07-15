@@ -5,6 +5,7 @@ package svc
 
 import (
 	"context"
+	"fmt"
 	"golang.org/x/sys/windows"
 	"os"
 	"path/filepath"
@@ -180,6 +181,8 @@ func (ws *windowsService) Execute(args []string, r <-chan wsvc.ChangeRequest, ch
 				t = EventTypesLogOff
 			case windows.WTS_SESSION_LOGON:
 				t = EventTypesLogOn
+			default:
+				ws.i.Log(fmt.Sprintf("SessionChange.EventType: %d", c.EventType))
 			}
 
 			ws.i.SessionChange(t)
